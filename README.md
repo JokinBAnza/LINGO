@@ -33,3 +33,6 @@
 ```bash
 git clone https://github.com/JokinBAnza/LingoPrueba
 "Prueba" 
+
+# LINGO
+LINGO game for web
