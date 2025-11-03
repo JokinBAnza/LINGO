@@ -1,0 +1,94 @@
+html{
+    height:100%;
+    width:100%;
+    margin:0px 0px 0px 0px;
+}
+body{
+    height:100%;
+    width:100%;
+    margin:0px 0px 0px 0px;
+}
+.divHeader{
+    display:flex;
+    flex-direction: row;
+    height: 80px;
+    width: 80px;
+}
+header h1{
+    margin-left: 15px;
+}
+header img{
+    transform: scale(1);
+}
+nav{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height:50px;
+    width:100%;
+}
+nav button{
+    margin-top: 10px;
+    margin-bottom:10px;
+    margin-left: 95px ;
+    margin-right: 95px ;
+}
+main {
+    height:100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+.Contenedor1{
+    display:flex;
+    flex-direction: column;
+    height:100%;
+    width:80%;
+}
+.Contenedor2 {
+  display: flex;            /* convierte el contenedor en flex */
+  justify-content: center;  /* centra horizontalmente */
+  align-items: center;      /* centra verticalmente */
+  height: 100%;             /* importante para centrar verticalmente, ajusta según necesidad */
+  margin: 0 auto; 
+  margin          /* opcional, centra todo el contenedor en la página */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  grid-template-rows: repeat(5, 60px);
+  gap: 8px;
+  transform:scale(1)
+}
+
+aside{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height:100%;
+    width:20%;
+    margin-right: 0px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 60px); /* 5 columnas iguales */
+  grid-template-rows: repeat(5, 60px);    /* 5 filas iguales */
+  gap: 8px; /* espacio entre celdas */
+  justify-content: center; /* centra horizontalmente */
+  align-content: center;   /* centra verticalmente */
+  margin-top: 20px;
+}
+
+.cell {
+  background-color: #ccc;
+  border: 2px solid #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  color: #333;
+}
