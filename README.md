@@ -1,5 +1,5 @@
 
-# Lingo Game
+# Lingo Game HOLA
 
 
 **Lingo** es un divertido juego de palabras en el que el jugador debe adivinar la palabra secreta en un número limitado de intentos. Este proyecto está desarrollado con HTML, CSS y JavaScript (o PHP/SQL si quieres backend).
