@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LINGO</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
-</head>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight"></h2>
+    </x-slot>
+            <!-- Tu HTML de LINGO -->
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+                <header>
+                    <div id="headerTitulo">
+                        <h1>LINGO</h1>
+                    </div>
+                    <div id="headerLogo">
+                        <img id="logo" src="{{ asset('Recursos/Logo LINGO Transparencia.png') }}" alt="Logo LINGO">
+                    </div>
+                    @vite('resources/css/estilos.css')
+                    @vite('resources/js/LINGO.js')
+                </header>
 
 <body>
   <header>
