@@ -17,12 +17,19 @@ function actualizarContador() {
     `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
 }
 
+//Si se acaba el tiempo
 let intervalo = setInterval(() => {
   if (juegoTerminado) return;
   tiempoRestante--;
-  if (tiempoRestante < 0) tiempoRestante = 0;
+  if (tiempoRestante <= 0) {
+    juegoTerminado = true;
+    clearInterval(intervalo);
+    window.location.href = `/fallo?palabra=${palabraSecreta}`;
+    return;
+  }
   actualizarContador();
 }, 1000);
+
 
 function reiniciarContador() {
   tiempoRestante = 60;
@@ -57,30 +64,10 @@ function tecladoClick(letra, img) {
       juegoTerminado = true;
       clearInterval(intervalo);
       const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
-      fetch('/partidas', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-        },
-        body: JSON.stringify({
-          tiempo: tiempoTotal,
-          ganada: true
-        })
-      })
-        .then(res => res.json())
-        .then(data => console.log('Partida guardada:', data))
-        .catch(err => console.error('Error al guardar la partida:', err));
-      const mensajeDiv = document.getElementById("mensajeFinal");
-      mensajeDiv.innerHTML = `
-    <h2 style="color:lime; text-align:center; font-size:28px;">
-      ¡Enhorabuena!
-    </h2>
-    <p style="text-align:center; color:green; font-size:20px;">
-      Has resuelto la palabra en <strong>${tiempoTotal} segundos</strong>.
-    </p>
-  `;
+      guardarPartida(tiempoTotal, true);
+      window.location.href = `${rutaAcierto}?tiempo=${tiempoTotal}&palabra=${palabraSecreta}`;
       return;
+
     }
 
     // preparamos siguiente fila
@@ -88,6 +75,17 @@ function tecladoClick(letra, img) {
     contPalabra = 0;
     filaActual++;
     reiniciarContador();
+
+    //Si fallo los 5 intentos
+    if (filaActual >= 5) {
+      juegoTerminado = true;
+      clearInterval(intervalo);
+      const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
+      guardarPartida(tiempoTotal, false);
+      window.location.href = `/fallo?palabra=${palabraSecreta}`;
+      return;
+    }
+
   }
 }
 
@@ -131,6 +129,30 @@ function verificarPalabra(palabra, palabraSecreta, fila) {
 
   return resultado;
 }
+
+function guardarPartida(tiempo, ganada) {
+  fetch('/partidas', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    },
+    body: JSON.stringify({
+      tiempo: tiempo,
+      ganada: ganada  // debe coincidir con el request->validate
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {   // tu controller devuelve 'ok': true
+        console.log('Partida guardada correctamente');
+      } else {
+        console.error('Error al guardar la partida');
+      }
+    })
+    .catch(err => console.error(err));
+}
+
 
 /* código para crear grid y teclado (si ya lo tienes, mantenlo igual) */
 const contenedor = document.getElementById("contenedor");

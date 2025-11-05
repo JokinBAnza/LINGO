@@ -13,7 +13,7 @@ class PartidaController extends Controller
      */
     public function index()
     {
-        $partidas = Partida::all();
+        $partidas = Partida::where('ganada', true)->orderBy('tiempo')->take(10)->get();
         return view('partidas.index', ['partidas' => $partidas]);
     }
 
@@ -37,17 +37,17 @@ class PartidaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'tiempo' => 'required|integer|min:0',
-        'ganada' => 'required|boolean',
-    ]);
+            'tiempo' => 'required|integer|min:0',
+            'ganada' => 'required|boolean',
+        ]);
 
-    Partida::create([
-        'jugador' => Auth::user()->name,
-        'tiempo' => $request->tiempo,
-        'ganada' => $request->ganada,
-    ]);
+        Partida::create([
+            'jugador' => Auth::user()->name,
+            'tiempo' => $request->tiempo,
+            'ganada' => $request->ganada,
+        ]);
 
-    return response()->json(['ok' => true]);
+        return response()->json(['ok' => true]);
     }
 
     /**
