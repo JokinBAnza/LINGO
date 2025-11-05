@@ -51,7 +51,10 @@ function iniciarJuego() {
         if (tiempoRestante <= 0) {
             juegoTerminado = true;
             clearInterval(intervalo);
-            window.location.href = `/fallo?palabra=${palabraSecreta}`;
+            const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
+            window.location.href = `/fallo?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`;
+
+
             return;
         }
         actualizarContador();
@@ -118,28 +121,61 @@ function tecladoClick(letra, img) {
     }
 
     if (contPalabra === N) {
-        const resultado = verificarPalabra(palabra, palabraSecreta, filaActual);
+        // Verificar si la palabra existe en la API
+        fetch(`http://185.60.43.155:3000/api/check/${palabra}`)
+            .then(res => res.json())
+            .then(data => {
+                if (!data.exists) {
+                    alert(`La palabra "${palabra}" no existe`);
+                    // Poner todas las letras en rojo
+                    for (let j = 0; j < N; j++) {
+                        const celda = document.getElementById(`${filaActual}x${j}`);
+                        if (celda && celda.children.length > 0) {
+                            const img = celda.querySelector("img");
+                            if (img) img.src = `Recursos/LetrasRojas/LetrasRojas${palabra[j]}.gif`;
+                        }
+                    }
 
-        if (resultado.every(r => r === "correcta")) {
-            juegoTerminado = true;
-            const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
-            guardarPartida(tiempoTotal, true)
-                .finally(() => window.location.href = `/acierto?palabra=${palabraSecreta}`);
-            return;
-        }
+                    palabra = "";
+                    contPalabra = 0;
+                    filaActual++;
+                    reiniciarContador();
 
-        palabra = "";
-        contPalabra = 0;
-        filaActual++;
-        reiniciarContador();
+                    if (filaActual >= 5) {
+                        juegoTerminado = true;
+                        const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
+                        guardarPartida(tiempoTotal, false);
+                        window.location.href = `/fallo?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`;
+                        return; // Salimos si palabra no existe
+                    }
+                }
 
-        if (filaActual >= 5) {
-            juegoTerminado = true;
-            const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
-            guardarPartida(tiempoTotal, false)
-                .finally(() => window.location.href = `/fallo?palabra=${palabraSecreta}`);
-            return;
-        }
+                // Si existe, comprobación normal
+                const resultado = verificarPalabra(palabra, palabraSecreta, filaActual);
+
+                if (resultado.every(r => r === "correcta")) {
+                    juegoTerminado = true;
+                    const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
+                    guardarPartida(tiempoTotal, true); // se ejecuta en segundo plano
+                    window.location.href = `/acierto?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`; // redirige al instante
+                    return;
+                }
+
+
+                palabra = "";
+                contPalabra = 0;
+                filaActual++;
+                reiniciarContador();
+
+                if (filaActual >= 5) {
+                    juegoTerminado = true;
+                    const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
+                    guardarPartida(tiempoTotal, false)
+                    window.location.href = `/fallo?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`;
+                    return;
+                }
+            })
+            .catch(err => console.error("Error al verificar la palabra:", err));
     }
 }
 
@@ -193,10 +229,10 @@ function guardarPartida(tiempo, ganada) {
         },
         body: JSON.stringify({ tiempo, ganada })
     })
-    .then(res => res.json())
-    .then(data => {
-        if (data.ok) console.log('Partida guardada correctamente');
-        else console.error('Error al guardar la partida');
-    })
-    .catch(err => console.error(err));
+        .then(res => res.json())
+        .then(data => {
+            if (data.ok) console.log('Partida guardada correctamente');
+            else console.error('Error al guardar la partida');
+        })
+        .catch(err => console.error(err));
 }

@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LINGO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,7 +58,9 @@
     const rutaAcierto = "{{ route('acierto') }}";
     const rutaFallo = "{{ route('fallo') }}";
 </script>
-  @vite('resources/js/LINGO.js')
+  {{-- @vite('resources/js/LINGO.js') --}}
+  <script src="{{ asset('js/LINGO.js') }}"></script>
+
 </body>
 
 </html>
