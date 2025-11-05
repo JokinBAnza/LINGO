@@ -57,6 +57,20 @@ function tecladoClick(letra, img) {
       juegoTerminado = true;
       clearInterval(intervalo);
       const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
+      fetch('/partidas', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({
+          tiempo: tiempoTotal,
+          ganada: true
+        })
+      })
+        .then(res => res.json())
+        .then(data => console.log('Partida guardada:', data))
+        .catch(err => console.error('Error al guardar la partida:', err));
       const mensajeDiv = document.getElementById("mensajeFinal");
       mensajeDiv.innerHTML = `
     <h2 style="color:lime; text-align:center; font-size:28px;">

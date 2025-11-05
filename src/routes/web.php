@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PalabraController;
+use App\Http\Controllers\PartidaController;
+
 
 // Página de inicio
 Route::get('/', function () {
@@ -13,9 +15,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/LINGO', function () {
+
+//LINGO
+Route::get('/lingo', function () {
     return view('LINGO');
-});
+})->middleware(['auth'])->name('lingo');
+
+//Tabla Partidas
+Route::post('/partidas', [PartidaController::class, 'store'])->middleware('auth');
 
 
 // Perfil (auth)

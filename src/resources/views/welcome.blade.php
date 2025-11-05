@@ -19,10 +19,23 @@
             text-align: center;
         }
         h1 {
-            font-size: 4rem;
+            font-size: 5rem;
             color: #111827;
             margin-bottom: 2rem;
         }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem; /* más pequeño en tablet/móvil */
+            }
+            .btn {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+                display: block; /* apila botones verticalmente */
+                margin: 0.5rem auto;
+            }
+        }
+
         .btn {
             display: inline-block;
             padding: 0.75rem 1.5rem;
