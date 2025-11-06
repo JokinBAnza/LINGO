@@ -146,8 +146,9 @@ function tecladoClick(letra, img) {
                         const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
                         guardarPartida(tiempoTotal, false);
                         window.location.href = `/fallo?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`;
-                        return; // Salimos si palabra no existe
+                       
                     }
+                     return; // Salimos si palabra no existe
                 }
 
                 // Si existe, comprobación normal
