@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Palabra;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+
 
 class PalabraController extends Controller
 {
@@ -34,6 +36,18 @@ class PalabraController extends Controller
 
         return view('palabras.index', ['palabras' => $palabras]);
     }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function verificarPalabra(String $palabra): JsonResponse
+    {
+        $existe = Palabra::where('palabra',$palabra)->exists();
+               
+        return response()->json(['palabra_buscada' => $palabra,'existe' => $existe]);
+        //return view('palabras.verificar', ['existe' => $existe]);
+    }
+
 
 
     /**
