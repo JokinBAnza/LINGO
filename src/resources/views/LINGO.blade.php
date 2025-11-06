@@ -12,6 +12,8 @@
 
   {{-- CSS desde resources --}}
   @vite('resources/css/estilos.css')
+  <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
+
 </head>
 
 <body>
