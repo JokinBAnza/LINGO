@@ -22,11 +22,6 @@
             margin: 0 auto;
         }
 
-        .login-container:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
-        }
-
         h1 {
             font-size: 3rem;
             color: #111827;
