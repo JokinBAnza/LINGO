@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 
   {{-- CSS desde resources --}}
   @vite('resources/css/estilos.css')
@@ -22,6 +23,7 @@
     <div id="headerLogo">
       <img id="logo" src="{{ asset('Recursos/LogoLingo.png') }}" alt="LOGO">
     </div>
+    @include('layouts.navigation')
   </header>
 
   <nav>
