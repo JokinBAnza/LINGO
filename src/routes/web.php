@@ -15,11 +15,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
 
-
 //LINGO
-Route::get('/lingo', function () {
-    return view('LINGO');
-})->middleware(['auth'])->name('lingo');
+Route::get('/lingo', [PartidaController::class, 'estadisticas'])
+    ->middleware(['auth'])
+    ->name('lingo');
 
 //Acierto
 Route::get('/acierto', function () {

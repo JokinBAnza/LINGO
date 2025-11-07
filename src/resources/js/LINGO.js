@@ -1,5 +1,3 @@
-console.log("JS cargado");
-
 let contPalabra = 0;
 let palabra = "";
 const ABECEDARIO = "QWERTYUIOPASDFGHJKLÑ ZXCVBNM";
@@ -13,24 +11,27 @@ let tiempoInicio = Date.now();
 let contadorElemento = document.getElementById("conta");
 let palabraSecreta = ""; // se asignará desde la API
 
-// Bloqueamos todo hasta que tengamos la palabra
+let intervaloJuego = null; // Control del setInterval
+let jugando = false;        // Estado del juego
+
+// ------------------- INICIALIZACIÓN -------------------
+
 function inicializarJuegoConPalabra(palabra) {
     palabraSecreta = palabra.toUpperCase();
     console.log("Palabra secreta final:", palabraSecreta);
     juegoListo = true;
 
-    iniciarJuego();
+    crearGridYTeclado();
+    actualizarContador();
 }
 
 // Petición a la API
 fetch('http://185.60.43.155:3000/api/word/1')
     .then(res => res.json())
     .then(data => {
-        console.log("Datos API:", data);
         if (data.word && data.word.length === N) {
             inicializarJuegoConPalabra(data.word);
         } else {
-            console.warn("API devolvió palabra inválida, usamos LINGO");
             inicializarJuegoConPalabra("LINGO");
         }
     })
@@ -41,27 +42,39 @@ fetch('http://185.60.43.155:3000/api/word/1')
 
 // ------------------- FUNCIONES -------------------
 
-function iniciarJuego() {
-    actualizarContador();
+function toggleJuego() {
+    if (!juegoListo || juegoTerminado) return;
 
-    // Contador
-    let intervalo = setInterval(() => {
-        if (juegoTerminado) return;
-        tiempoRestante--;
-        if (tiempoRestante <= 0) {
-            juegoTerminado = true;
-            clearInterval(intervalo);
-            const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
-            window.location.href = `/fallo?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`;
-
-
-            return;
-        }
+    if (!jugando) {
+        // Iniciar juego
+        jugando = true;
+        tiempoInicio = Date.now();
+        if (tiempoRestante <= 0) tiempoRestante = 60; 
         actualizarContador();
-    }, 1000);
 
+        intervaloJuego = setInterval(() => {
+            if (juegoTerminado) return;
+            tiempoRestante--;
+            if (tiempoRestante <= 0) {
+                clearInterval(intervaloJuego);
+                juegoTerminado = true;
+                const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
+                window.location.href = `/fallo?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`;
+                return;
+            }
+            actualizarContador();
+        }, 1000);
+    } else {
+        // Pausar juego
+        jugando = false;
+        clearInterval(intervaloJuego);
+    }
+}
+
+function crearGridYTeclado() {
     // Crear grid
     const contenedor = document.getElementById("contenedor");
+    contenedor.innerHTML = ""; // Limpiar grid
     for (let i = 0; i < N; i++) {
         for (let j = 0; j < N; j++) {
             const celda = document.createElement("div");
@@ -72,6 +85,7 @@ function iniciarJuego() {
 
     // Crear teclado
     const contenedor2 = document.getElementById("contenedor2");
+    contenedor2.innerHTML = ""; // Limpiar teclado
     let contador = 1;
     const FILAS = 3;
     const COLUMNAS = 10;
@@ -102,6 +116,8 @@ function reiniciarContador() {
     actualizarContador();
 }
 
+// ------------------- TECLADO -------------------
+
 function tecladoClick(letra, img) {
     if (juegoTerminado || !juegoListo) return;
 
@@ -121,13 +137,12 @@ function tecladoClick(letra, img) {
     }
 
     if (contPalabra === N) {
-        // Verificar si la palabra existe en la API
+        // Verificar palabra
         fetch(`http://185.60.43.155:3000/api/check/${palabra}`)
             .then(res => res.json())
             .then(data => {
                 if (!data.exists) {
                     alert(`La palabra "${palabra}" no existe`);
-                    // Poner todas las letras en rojo
                     for (let j = 0; j < N; j++) {
                         const celda = document.getElementById(`${filaActual}x${j}`);
                         if (celda && celda.children.length > 0) {
@@ -135,46 +150,25 @@ function tecladoClick(letra, img) {
                             if (img) img.src = `Recursos/LetrasRojas/LetrasRojas${palabra[j]}.gif`;
                         }
                     }
-
                     palabra = "";
                     contPalabra = 0;
                     filaActual++;
                     reiniciarContador();
-
-                    if (filaActual >= 5) {
-                        juegoTerminado = true;
-                        const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
-                        guardarPartida(tiempoTotal, false);
-                        window.location.href = `/fallo?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`;
-                       
-                    }
-                     return; // Salimos si palabra no existe
-                }
-
-                // Si existe, comprobación normal
-                const resultado = verificarPalabra(palabra, palabraSecreta, filaActual);
-
-                if (resultado.every(r => r === "correcta")) {
-                    juegoTerminado = true;
-                    const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
-                    guardarPartida(tiempoTotal, true); // se ejecuta en segundo plano
-                    window.location.href = `/acierto?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`; // redirige al instante
+                    if (filaActual >= 5) terminarJuego(false);
                     return;
                 }
 
+                const resultado = verificarPalabra(palabra, palabraSecreta, filaActual);
+                if (resultado.every(r => r === "correcta")) {
+                    terminarJuego(true);
+                    return;
+                }
 
                 palabra = "";
                 contPalabra = 0;
                 filaActual++;
                 reiniciarContador();
-
-                if (filaActual >= 5) {
-                    juegoTerminado = true;
-                    const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
-                    guardarPartida(tiempoTotal, false)
-                    window.location.href = `/fallo?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`;
-                    return;
-                }
+                if (filaActual >= 5) terminarJuego(false);
             })
             .catch(err => console.error("Error al verificar la palabra:", err));
     }
@@ -183,7 +177,6 @@ function tecladoClick(letra, img) {
 function verificarPalabra(palabra, palabraSecreta, fila) {
     palabra = palabra.toUpperCase();
     palabraSecreta = palabraSecreta.toUpperCase();
-
     const resultado = Array(palabra.length).fill("incorrecta");
     const letrasPendientes = palabraSecreta.split("");
 
@@ -209,16 +202,23 @@ function verificarPalabra(palabra, palabraSecreta, fila) {
         const img = celda.querySelector("img");
         if (!img) continue;
 
-        if (resultado[i] === "correcta") {
-            img.src = `Recursos/LetrasVerdes/${palabra[i]}.gif`;
-        } else if (resultado[i] === "existe") {
-            img.src = `Recursos/LetrasNaranjas/${palabra[i]}.png`;
-        } else {
-            img.src = `Recursos/LetrasRojas/LetrasRojas${palabra[i]}.gif`;
-        }
+        if (resultado[i] === "correcta") img.src = `Recursos/LetrasVerdes/${palabra[i]}.gif`;
+        else if (resultado[i] === "existe") img.src = `Recursos/LetrasNaranjas/${palabra[i]}.png`;
+        else img.src = `Recursos/LetrasRojas/LetrasRojas${palabra[i]}.gif`;
     }
 
     return resultado;
+}
+
+function terminarJuego(ganada) {
+    juegoTerminado = true;
+    jugando = false;
+    clearInterval(intervaloJuego);
+    const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
+    guardarPartida(tiempoTotal, ganada);
+    window.location.href = ganada 
+        ? `/acierto?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`
+        : `/fallo?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`;
 }
 
 function guardarPartida(tiempo, ganada) {
@@ -230,10 +230,10 @@ function guardarPartida(tiempo, ganada) {
         },
         body: JSON.stringify({ tiempo, ganada })
     })
-        .then(res => res.json())
-        .then(data => {
-            if (data.ok) console.log('Partida guardada correctamente');
-            else console.error('Error al guardar la partida');
-        })
-        .catch(err => console.error(err));
+    .then(res => res.json())
+    .then(data => data.ok ? console.log('Partida guardada') : console.error('Error al guardar'))
+    .catch(err => console.error(err));
 }
+
+// ------------------- BOTÓN JUGAR -------------------
+document.getElementById("botonJugar").addEventListener("click", toggleJuego);

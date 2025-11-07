@@ -49,6 +49,20 @@ class PartidaController extends Controller
 
         return response()->json(['ok' => true]);
     }
+    
+public function estadisticas()
+{
+    $user = Auth::user()->name;
+
+    $victorias = Partida::where('jugador', $user)->where('ganada', true)->count();
+    $derrotas  = Partida::where('jugador', $user)->where('ganada', false)->count();
+
+     $puntuacion = ($victorias * 10) - ($derrotas * 5);
+
+    return view('LINGO', compact('victorias', 'derrotas', 'puntuacion'));
+}
+
+
 
     /**
      * Display the specified resource.

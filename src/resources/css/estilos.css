@@ -98,6 +98,7 @@ aside {
     align-items: center;
     padding: 10px;
     box-sizing: border-box;
+    color:white;
 }
 
 aside button {
@@ -176,6 +177,7 @@ aside button {
     margin-top: 10px;
     gap: 5px;
     font-size: 1.1rem;
+    
 }
 
 #mensajeFinal {
