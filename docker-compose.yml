@@ -53,25 +53,22 @@ services:
       # El host es el nombre del servicio Docker de la base de datos
       PMA_HOST: db
       # El puerto de MySQL dentro de la red Docker
-      PMA_PORT: 3306 
+      PMA_PORT: 3306
     depends_on:
       - db
     networks:
       - lingo_network
-  
+
   node:
     image: node:22
     working_dir: /var/www/html
     volumes:
-      - ./src:/var/www/html
+      - ./src:/var/www/html # monta todo el proyecto para que Vite vea resources/
     ports:
-      - "5173:5173"
-    #Se instalan dependencias y pone en marcha el servicio  
-    command: sh -c "npm install && npm run dev -- --host"
-    # Conecta a la red interna
+      - "5175:5175" # puerto para Vite dev server
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5175"
     networks:
       - lingo_network
-
 
 # ----------------------------------------------------
 # 4. REDES Y VOLÚMENES

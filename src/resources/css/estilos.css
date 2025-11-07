@@ -1,3 +1,4 @@
+/* --- RESET Y BASE --- */
 * {
     font-family: "Jersey 25", sans-serif;
     margin: 0;
@@ -8,46 +9,52 @@
 html,
 body {
     overflow-x: hidden;
+    max-width: 100%;
 }
 
 body {
-    margin: 0;
-    background-color: #004099;
+    background-color: #00204D;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
 }
+
+/* --- LOGO --- */
 #logo {
-    width: 80px;  /* ajusta al tamaño deseado */
-    height: auto; /* mantiene la proporción */
+    width: 80px;
+    height: auto;
     display: block;
-    margin: 0 auto 1rem auto; /* centra y separa del contenido */
+    margin: 0 auto 1rem auto;
 }
 
-
+/* --- HEADER --- */
 header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px 0;
+
     width: 100%;
+    box-sizing: border-box;
 }
 
 header img {
     height: 40px;
     width: 40px;
+    padding-top:20px;
 }
 
 #headerTitulo h1 {
     margin: 5px 0;
-    font-size: 3.2rem;
 }
 
+/* --- NAV --- */
 nav {
     background-color: #4b85b6;
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 #divNav {
@@ -78,6 +85,7 @@ main {
     display: flex;
     flex-direction: row;
     align-items: stretch;
+    max-width: 100%;
     box-sizing: border-box;
 }
 
@@ -94,18 +102,16 @@ aside {
 
 aside button {
     width: 85%;
-    padding: 10px;
+    padding: 15px;
     border-radius: 6px;
     border: none;
     color: white;
     background-color: #4b85b6;
     font-size: 1rem;
-    padding: 15px;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 /* --- CONTENEDOR PRINCIPAL --- */
@@ -115,9 +121,8 @@ aside button {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* centra verticalmente */
     align-items: center;
-    /* centra horizontalmente */
+    max-width: 100%;
     box-sizing: border-box;
 }
 
@@ -127,10 +132,12 @@ aside button {
     grid-template-columns: repeat(5, 1fr);
     gap: 4px;
     width: 90%;
-    max-width: 350px;
+    max-width: 500px;
+    box-sizing: border-box;
 }
 
-#contenedor div {
+#contenedor div,
+#contenedor2 div {
     border: 1px solid black;
     aspect-ratio: 1 / 1;
     display: flex;
@@ -143,16 +150,12 @@ aside button {
     grid-template-columns: repeat(10, 1fr);
     gap: 4px;
     width: 95%;
-    max-width: 450px;
+    max-width: 650px;
     margin-top: 10px;
+    box-sizing: border-box;
 }
 
 #contenedor2 div {
-    border: 1px solid black;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
 }
 
@@ -177,6 +180,7 @@ aside button {
     color: #0a3b87;
 }
 
+/* --- FOOTER --- */
 footer {
     width: 100%;
     background-color: #004099;
@@ -185,25 +189,29 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 100%;
+    box-sizing: border-box;
 }
-
-
-
-
 
 /* --- MOVIL --- */
 @media (max-width: 600px) {
+    /* Header */
     header {
         justify-content: center;
-        align-items: center;
         gap: 5px;
     }
 
     #headerTitulo h1 {
-        font-size: 2.2rem;
+        font-size: 5.2rem;
         margin-left: 20px;
     }
 
+    #headerLogo #logo {
+        padding-top: 10px;
+        margin-bottom: 0px;
+    }
+
+    /* Main y contenedores */
     main {
         flex-direction: column;
     }
@@ -216,22 +224,96 @@ footer {
         width: 100%;
     }
 
-
     #contenedor0 {
         width: 100%;
     }
+
+    /* Grid contenedor principal */
+    #contenedor {
+        display: grid;
+        grid-template-columns: repeat(5, 40px); /* columnas fijas */
+        gap: 4px;
+        justify-content: center;
+        width: 100%;
+    }
+
+    #contenedor2 {
+        display: grid;
+        grid-template-columns: repeat(10, 35px); /* columnas fijas */
+        gap: 4px;
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* Celdas */
+    #contenedor div,
+    #contenedor2 div {
+        width: 40px;
+        height: 40px;
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Imágenes dentro de las celdas */
+    #contenedor div img,
+    #contenedor2 div img {
+        width: 70%;         
+        height: 70%;
+        object-fit: contain;
+    }
 }
+/* --- TABLET / INTERMEDIA --- */
+@media (min-width: 601px) and (max-width: 767px) {
+    main {
+        flex-direction: row; /* mantiene fila como escritorio */
+    }
+    header{
+        justify-content: center;
+    }
+      #headerTitulo h1 {
+        margin-left: 10px;
+        font-size: 3.5rem;
+    }
+
+    aside {
+        width: 15%; /* un poco más ancho que escritorio para adaptarse */
+        padding: 10px;
+        gap: 8px;
+    }
+
+    aside button {
+        width: 90%;             /* ocupa casi todo el aside */
+        font-size: clamp(0.8rem, 2vw, 1rem); /* tamaño adaptable */
+        padding: 10px;
+        white-space: normal;
+        word-wrap: break-word;
+        text-align: center;
+    }
+
+    #contenedor0 {
+        width: 95%; /* ajusta el contenedor principal */
+    }
+    
+}
+
 
 /* --- ORDENADOR --- */
 @media (min-width: 768px) {
     header {
         flex-direction: row;
-        padding: 10px 30px;
+        padding: 5px 20px; /* menos padding para ocupar menos */
+        max-width: 100%;
+        box-sizing: border-box;
+        
     }
 
     #headerTitulo h1 {
-        font-size: 3.2rem;
-        margin-left: 20px;
+        margin-left: 10px;
+        font-size: 4.5rem;
+        margin-right:10px;
     }
 
     nav {
@@ -249,6 +331,28 @@ footer {
         padding: 10px 20px;
         font-size: 1rem;
     }
+    main {
+        flex-direction: row; /* mantiene fila como escritorio */
+    }
+
+    aside {
+        width: 15%; /* un poco más ancho que escritorio para adaptarse */
+        padding: 10px;
+        gap: 8px;
+    }
+
+    aside button {
+        width: 90%;             /* ocupa casi todo el aside */
+        font-size: clamp(0.8rem, 2vw, 1rem); /* tamaño adaptable */
+        padding: 10px;
+        white-space: normal;
+        word-wrap: break-word;
+        text-align: center;
+    }
+
+    #contenedor0 {
+        width: 95%; /* ajusta el contenedor principal */
+    }
 
     #contenedor {
         max-width: 500px;
@@ -261,7 +365,8 @@ footer {
     #contenedor3 {
         font-size: 1.3rem;
     }
+
     footer p {
-    margin-left: 9.5%;
-}
+        margin-left: 255px; /* evita overflow */
+    }
 }

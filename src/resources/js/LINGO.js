@@ -107,8 +107,8 @@ function tecladoClick(letra, img) {
 
     palabra += letra;
     const nuevaImagen = img.cloneNode(true);
-    nuevaImagen.style.width = "70px";
-    nuevaImagen.style.height = "70px";
+    nuevaImagen.style.width = "70%";
+    nuevaImagen.style.height = "70%";
     nuevaImagen.style.objectFit = "contain";
 
     for (let j = 0; j < N; j++) {
