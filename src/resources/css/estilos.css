@@ -352,6 +352,7 @@ footer {
         width: 10%; /* un poco más ancho que escritorio para adaptarse */
         padding: 10px;
         gap: 8px;
+        color:white;
     }
 
     aside button {
