@@ -13,7 +13,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->middleware('auth')->name('dashboard');
 
 
 //LINGO
@@ -49,17 +49,17 @@ Route::middleware('auth')->group(function () {
 });
 
 // Rutas de PalabraController
-Route::get('/palabras', [PalabraController::class, 'index'])->name('palabras.index');
-Route::get('/palabrasStyled', [PalabraController::class, 'indexStyled'])->name('palabras.indexStyled');
-Route::get('/palabrasBlade', [PalabraController::class, 'indexBlade'])->name('palabras.indexBlade');
-Route::get('/palabrasRandom/{cantidad?}', [PalabraController::class, 'indexRandom'])->name('palabras.indexRandom');
+//Route::get('/palabras', [PalabraController::class, 'index'])->name('palabras.index');
+//Route::get('/palabrasStyled', [PalabraController::class, 'indexStyled'])->name('palabras.indexStyled');
+//Route::get('/palabrasBlade', [PalabraController::class, 'indexBlade'])->name('palabras.indexBlade');
+Route::get('/palabrasRandom/{cantidad?}', [PalabraController::class, 'indexRandom'])
+->middleware('auth')
+->name('palabras.indexRandom');
 
 
 //Ruta que devuelve de la tabla 'palabras' una palabra aleatoria
 //Route::get('/palabrasRandom/', [PalabraController::class, indexRandom'])->name('palabras.indexRandomw');
 
-//Ruta que devuelve de la tabla 'palabras' la cantidad de palabras aleatorias solicitada por URL y sino, devuelve 5 palabras
-Route::get('/palabrasRandom/{cantidad?}', [PalabraController::class, 'indexRandom'])->name('palabras.indexRandomw');
 
 //Ruta que verifica si la palabra dada en la ruta existe en la tabla 'palabras' y devuelve json
 Route::get('/verificarPalabra/{palabra}', [PalabraController::class, 'verificarPalabra'])

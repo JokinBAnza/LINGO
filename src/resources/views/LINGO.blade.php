@@ -12,7 +12,7 @@
 
   {{-- CSS desde resources --}}
   @vite('resources/css/estilos.css')
-  <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
+  <!--<link rel="stylesheet" href="{{ asset('css/estilos.css') }}">-->
 
 </head>
 
@@ -60,8 +60,8 @@
     const rutaAcierto = "{{ route('acierto') }}";
     const rutaFallo = "{{ route('fallo') }}";
 </script>
-  {{-- @vite('resources/js/LINGO.js') --}}
-  <script src="{{ asset('js/LINGO.js') }}"></script>
+  @vite('resources/js/LINGO.js')
+  <!--<script src="{{ asset('js/LINGO.js') }}"></script>-->
 
 </body>
 

@@ -19,6 +19,13 @@ body {
     align-items: center;
     min-height: 100vh;
 }
+#logo {
+    width: 80px;  /* ajusta al tamaño deseado */
+    height: auto; /* mantiene la proporción */
+    display: block;
+    margin: 0 auto 1rem auto; /* centra y separa del contenido */
+}
+
 
 header {
     display: flex;
@@ -35,7 +42,7 @@ header img {
 
 #headerTitulo h1 {
     margin: 5px 0;
-    font-size: 1.8rem;
+    font-size: 3.2rem;
 }
 
 nav {
@@ -223,7 +230,7 @@ footer {
     }
 
     #headerTitulo h1 {
-        font-size: 2.2rem;
+        font-size: 3.2rem;
         margin-left: 20px;
     }
 

@@ -14,27 +14,32 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
-    {
-        return view('auth.login');
+ public function create(): View|RedirectResponse
+{
+    if (Auth::check()) {
+        return redirect()->route('lingo');
     }
+    return view('auth.login');
+}
 
     /**
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
 {
-    // Determinar si el usuario marcó "remember me"
     $remember = $request->filled('remember');
 
-    // Autenticar pasando el valor de $remember
-    $request->authenticate($remember);
+    // Autenticar manualmente con remember opcional
+    if (Auth::attempt($request->only('email', 'password'), $remember)) {
+        $request->session()->regenerate();
+        return redirect()->route('lingo');
+    }
 
-    // Regenerar la sesión
-    $request->session()->regenerate();
-
-    return redirect()->intended(route('dashboard', absolute: false));
+    return back()->withErrors([
+        'email' => 'Las credenciales no coinciden con nuestros registros.',
+    ]);
 }
+
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
