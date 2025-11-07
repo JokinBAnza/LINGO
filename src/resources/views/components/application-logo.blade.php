@@ -1,1 +1,1 @@
-<img src="{{ asset('Recursos/LogoLingo.png') }}" alt="Mi Logo" id="logo">
+<img src="{{ asset('ruta/de/la/imagen.png') }}" alt="Logo" style="width: 150px; height: auto;">

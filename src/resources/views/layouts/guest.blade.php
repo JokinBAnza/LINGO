@@ -19,7 +19,8 @@
 
         <div>
             <a href="/">
-                <img src="{{ asset('Recursos/LogoLingo.png') }}" alt="Mi Logo" id="logo">
+                <img src="{{ asset('Recursos/LogoLingo.png') }}" alt="Mi Logo" id="logo" style="width:150px; height:auto;">
+
             </a>
         </div>
 
