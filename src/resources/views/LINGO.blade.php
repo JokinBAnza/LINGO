@@ -52,17 +52,18 @@
     </div>
   </main>
 
+  <!-- Configuración de rutas para JS -->
+  <div id="config" 
+       data-ruta-acierto="{{ route('acierto') }}" 
+       data-ruta-fallo="{{ route('fallo') }}">
+  </div>
+
+  <!-- Luego carga tu JS clásico -->
+  <script src="{{ asset('js/LINGO.js') }}"></script>
+
   <footer>
     <p>&copy; Plaiaundi 2025</p>
   </footer>
-
-  <script>
-    const rutaAcierto = "{{ route('acierto') }}";
-    const rutaFallo = "{{ route('fallo') }}";
-</script>
-  {{-- @vite('resources/js/LINGO.js') --}}
-  <script src="{{ asset('js/LINGO.js') }}"></script>
-
 </body>
 
 </html>
