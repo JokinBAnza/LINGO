@@ -37,18 +37,24 @@
 
   <main>
     <aside id="panelLateral">
+      <div id="contenedor3">
       <button id="btnTiempo">TIEMPO</button>
+        <p id="conta"></p>
+      </div>
+      <div id="contenedorPunt">
       <button id="btnPuntuacion">PUNTUACIÓN</button>
+      <p id="victorias">{{ $puntuacion }}</p>
+      </div>
+      <div id="contenedorEst">
       <button id="btnEstadisticas">ESTADÍSTICAS</button>
+      <p id="victorias">VICTORIAS:{{ $victorias }}</p>
+      <p id="derrotas">DERROTAS:{{ $derrotas }}</p>
+      </div>
     </aside>
 
     <div id="contenedor0">
       <div id="contenedor"></div>
       <div id="contenedor2"></div>
-      <div id="contenedor3">
-        <h3 id="tiempo">Tiempo:</h3>
-        <p id="conta"></p>
-      </div>
     </div>
   </main>
 

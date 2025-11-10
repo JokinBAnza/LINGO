@@ -49,24 +49,27 @@ document.getElementById("botonJugar").addEventListener("click", () => {
 
     tiempoPausado = !tiempoPausado; // alterna pausa/reanudar
 
-    if (!timerInterval && !tiempoPausado) {
+     botonJugar.textContent = tiempoPausado ? "JUGAR" : "PARAR";
+
+    if (!timerInterval) {
         tiempoInicio = Date.now();
         timerInterval = setInterval(() => {
-            if (juegoTerminado || tiempoPausado) return;
+            if (juegoTerminado) return;
 
-            tiempoRestante--;
-            if (tiempoRestante <= 0) {
-                juegoTerminado = true;
-                clearInterval(timerInterval);
-                const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
-                window.location.href = `/fallo?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`;
-                return;
+            if (!tiempoPausado) {
+                tiempoRestante--;
+                if (tiempoRestante <= 0) {
+                    juegoTerminado = true;
+                    clearInterval(timerInterval);
+                    const tiempoTotal = Math.floor((Date.now() - tiempoInicio) / 1000);
+                    window.location.href = `/fallo?palabra=${palabraSecreta}&tiempo=${tiempoTotal}`;
+                    return;
+                }
+                actualizarContador();
             }
-            actualizarContador();
         }, 1000);
     }
 });
-
 // ------------------- CONTADOR -------------------
 function actualizarContador() {
     let minutos = Math.floor(tiempoRestante / 60);

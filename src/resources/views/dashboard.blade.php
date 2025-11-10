@@ -1,21 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        <header>
+            <h2>Dashboard</h2>
+        </header>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
+    <div class="contenedor">
+        <div class="tarjeta">
+            <div class="contenido">
+                <p>You're logged in!</p>
+                <a href="{{ route('lingo') }}" class="boton-lingo">LINGO</a>
             </div>
         </div>
     </div>
 </x-app-layout>
-<style>/* --- RESET Y BASE --- */
+
+<style>
+/* --- RESET Y BASE --- */
 * {
   margin: 0;
   padding: 0;
@@ -39,44 +40,47 @@ header h2 {
 }
 
 /* --- CONTENEDOR PRINCIPAL --- */
-.py-12 {
+.contenedor {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 75vh;
 }
 
-.max-w-7xl {
-  width: 90%;
-  max-width: 700px;
-}
-
-.bg-white {
+.tarjeta {
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid #ffcc00;
   border-radius: 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.tarjeta:hover {
+  transform: scale(1.02);
 }
 
 /* --- CONTENIDO INTERNO --- */
-.p-6 {
+.contenido {
   padding: 2rem;
   text-align: center;
   color: #fff;
   font-size: 1.4rem;
 }
 
-.text-gray-900 {
-  color: #fff !important;
+.boton-lingo {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 25px;
+  background: #ffcc00;
+  color: #000;
+  font-weight: bold;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
-/* --- ANIMACIÓN SUAVE --- */
-.bg-white {
-  transition: transform 0.3s ease;
-}
-
-.bg-white:hover {
-  transform: scale(1.02);
+.boton-lingo:hover {
+  background: #ffd633;
 }
 
 /* --- RESPONSIVE --- */
@@ -85,7 +89,7 @@ header h2 {
     font-size: 1.8rem;
   }
 
-  .p-6 {
+  .contenido {
     font-size: 1.1rem;
     padding: 1.5rem;
   }
