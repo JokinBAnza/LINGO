@@ -218,6 +218,9 @@ footer {
     footer{
         height:0px;
     }
+    #divNav button{
+        padding:0px;
+    }
 
     aside#panelLateral {
         width: 100%;
@@ -234,7 +237,7 @@ footer {
     aside#panelLateral button {
         width: 80%;       /* igual que nav */
         max-width: 300px; /* opcional */
-        padding: 10px;
+        padding: 0px;
         /*! margin-top:20px; */
         font-size: 1rem;
         text-align: center;
@@ -299,6 +302,9 @@ footer {
 
     nav {
         height: 60px;
+    }
+     aside button{
+        width:100px;
     }
 
     #divNav {
@@ -382,7 +388,7 @@ footer {
 
     aside#panelLateral {
         width: 25%;
-        padding: 10px;
+        padding-top:50px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -391,11 +397,14 @@ footer {
         box-sizing: border-box;
         max-height: none; /* deja crecer según contenido */
     }
+    #contenedor3{
+        height:50px;
+    }
 
     aside#panelLateral button {
         width: 100%;
         max-width: 200px;
-        padding: 12px;
+        padding: 5px;
         font-size: 1rem;
         text-align: center;
         border-radius: 6px;
