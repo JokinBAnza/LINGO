@@ -176,7 +176,7 @@ aside button {
 }
 
 #contenedor3 {
-    display: flex;
+    /*! display: flex; */
     flex-direction:column;
     justify-content: center;
     align-items: center;
@@ -235,8 +235,8 @@ footer {
     }
 
     aside#panelLateral button {
-        width: 80%;       /* igual que nav */
-        max-width: 300px; /* opcional */
+        width: 100%;       /* igual que nav */
+        max-width: 430px; /* opcional */
         padding: 0px;
         /*! margin-top:20px; */
         font-size: 1rem;
@@ -318,6 +318,10 @@ footer {
         padding: 10px 20px;
         font-size: 1rem;
     }
+    aside{
+        display:flex;
+        text-align: center;
+    }
 
     #contenedor {
         max-width: 500px;
@@ -342,7 +346,9 @@ footer {
 }
 /* --- TABLET --- */
 @media (min-width: 601px) and (max-width: 1024px) {
-    
+    body{
+        height:900px;
+    }
     header {
         flex-direction: row;
         padding: 10px 20px;
@@ -381,7 +387,7 @@ footer {
         padding-bottom:0px;
     }
     aside{
-        height:580px;
+        height:730px;
         margin-bottom:0px;
         padding-bottom:0px;
     }
@@ -393,7 +399,7 @@ footer {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        gap: 10px;
+        gap: 100px;
         box-sizing: border-box;
         max-height: none; /* deja crecer según contenido */
     }

@@ -43,7 +43,9 @@
       </div>
       <div id="contenedorPunt">
       <button id="btnPuntuacion">PUNTUACIÓN</button>
-      <p id="victorias">{{ $puntuacion }}</p>
+      <p id="victorias">{{ $puntuacion }} puntos</p>
+      <p>(Victorias:+10 puntos)</p>
+      <p>(Derrotas: -5 puntos)</p>
       </div>
       <div id="contenedorEst">
       <button id="btnEstadisticas">ESTADÍSTICAS</button>
