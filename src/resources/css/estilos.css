@@ -17,7 +17,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
+    margin-bottom: 10px;
 }
 #contenedor3{
     color:white;
@@ -76,6 +76,7 @@ main {
     flex-direction: row;
     align-items: stretch;
     box-sizing: border-box;
+    margin-bottom:10px;
 }
 
 aside {
@@ -105,7 +106,6 @@ aside {
 
 aside button {
     width: 85%;
-    padding: 10px;
     border-radius: 6px;
     border: none;
     color: white;
@@ -170,7 +170,9 @@ aside button {
 #contenedor2 img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    -o-object-fit: contain;
+       object-fit: contain;
+    
 }
 
 #contenedor3 {
@@ -188,6 +190,9 @@ aside button {
     text-align: center;
     color: #0a3b87;
 }
+#contenedor0{
+    margin-bottom:10px;
+}
 
 footer {
     width: 100%;
@@ -197,6 +202,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top:10px;
 }
 
 
@@ -205,32 +211,77 @@ footer {
 
 /* --- MOVIL --- */
 @media (max-width: 600px) {
-    header {
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-    }
-
-    #headerTitulo h1 {
-        font-size: 2.2rem;
-        margin-left: 20px;
-    }
-
     main {
         flex-direction: column;
+        align-items: center;
+    }
+    footer{
+        height:0px;
     }
 
-    aside {
+    aside#panelLateral {
+        width: 100%;
+        padding: 10px 5px;
+        display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 15px 0;
-        gap: 10px;
-        width: 100%;
+        justify-content: flex-start; 
+        gap: 5px;
+        box-sizing: border-box;
+        max-height: none; /* deja crecer el aside según contenido */
     }
 
+    aside#panelLateral button {
+        width: 80%;       /* igual que nav */
+        max-width: 300px; /* opcional */
+        padding: 10px;
+        /*! margin-top:20px; */
+        font-size: 1rem;
+        text-align: center;
+        border-radius: 6px;
+        background-color: #4b85b6;
+        color: white;
+        border: none;
+        display: block;
+        box-sizing: border-box;
+    }
+
+    #contenedor3,
+    #contenedorPunt,
+    #contenedorEst {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        text-align: center;
+        box-sizing: border-box;
+        padding-top: 0px;
+    }
+
+    #contenedor3 p,
+    #contenedorPunt p,
+    #contenedorEst p {
+        margin: 3px 0;
+        font-size: 0.9rem;
+        word-wrap: break-word;
+    }
 
     #contenedor0 {
-        width: 100%;
+        width: 95%;
+        margin-top: 10px;
+    }
+
+    #contenedor {
+        max-width: 300px;
+    }
+
+    #contenedor2 {
+        max-width: 350px;
+    }
+    #contenedor3{
+        margin-top:30px;
+        margin-bottom:25px;
     }
 }
 
@@ -273,7 +324,118 @@ footer {
     #contenedor3 {
         font-size: 1.3rem;
     }
+   footer{
+        margin:0px 0px 0px 0px;
+        padding:0px 0px 0px 0px;
+    }
     footer p {
     margin-left: 9.5%;
+    margin-top:0px;
+        margin-bottom:0px;
 }
+}
+/* --- TABLET --- */
+@media (min-width: 601px) and (max-width: 1024px) {
+    
+    header {
+        flex-direction: row;
+        padding: 10px 20px;
+        justify-content: space-between;
+    }
+
+    #headerTitulo h1 {
+        font-size: 2.5rem;
+        margin-left: 10px;
+    }
+
+    nav {
+        height: 60px;
+    }
+
+    #divNav {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    #divNav button {
+        width: 120px;
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
+
+    main {
+        display:flex;
+        flex-direction: row;
+        align-items: flex-start;
+        width: 95%;
+        gap: 10px;
+        margin-bottom:0px;
+        padding-bottom:0px;
+    }
+    aside{
+        height:580px;
+        margin-bottom:0px;
+        padding-bottom:0px;
+    }
+
+    aside#panelLateral {
+        width: 25%;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        box-sizing: border-box;
+        max-height: none; /* deja crecer según contenido */
+    }
+
+    aside#panelLateral button {
+        width: 100%;
+        max-width: 200px;
+        padding: 12px;
+        font-size: 1rem;
+        text-align: center;
+        border-radius: 6px;
+        background-color: #4b85b6;
+        color: white;
+        border: none;
+        display: block;
+        box-sizing: border-box;
+    }
+
+    #contenedor0 {
+        width: 70%;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #contenedor {
+        max-width: 400px;
+    }
+
+    #contenedor2 {
+        max-width: 500px;
+    }
+    footer{
+        margin-top:0px;
+    }
+
+    #contenedor3,
+    #contenedorPunt,
+    #contenedorEst {
+        width: 90%;
+        text-align: center;
+        gap: 5px;
+    }
+
+    #contenedor3 p,
+    #contenedorPunt p,
+    #contenedorEst p {
+        font-size: 1rem;
+    }
 }

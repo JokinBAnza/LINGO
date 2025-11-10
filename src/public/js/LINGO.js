@@ -242,3 +242,9 @@ function guardarPartida(tiempo, ganada) {
         })
         .catch(err => console.error(err));
 }
+function botonRanking(){
+    document.getElementById("botonRanking").addEventListener("click", () => {
+        window.location.href = '/partidas';
+    });
+}
+botonRanking();
