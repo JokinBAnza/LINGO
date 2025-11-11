@@ -90,3 +90,5 @@ Sistema de puntuaciones por usuario más completo.
 Diccionario más amplio de palabras secretas.
 
 Modo multijugador en tiempo real.
+
+**AVISO** NAVEGADOR RECOMENDABLE: MOZILLA FIREFOX. (CHROME puede dar problemas o incoherencias en el CSS).
