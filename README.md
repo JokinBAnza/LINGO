@@ -74,7 +74,7 @@ Sube los archivos a cualquier hosting que soporte PHP y MySQL.
 Configura correctamente la base de datos en .env.
 
 Asegúrate de ejecutar composer install en el servidor y las migraciones con php artisan migrate.
-
+```bash
 📂 Estructura del proyecto
 LINGO/
 ├─ src/             # Código fuente del juego y backend (controladores, vistas, assets)
@@ -84,6 +84,7 @@ LINGO/
 │  └─ database/     # Migraciones y seeds
 ├─ .env             # Configuración de entorno
 └─ composer.json    # Dependencias de PHP
+```
 
 💡 Mejoras futuras
 
