@@ -86,9 +86,8 @@ LINGO/
 └─ composer.json    # Dependencias de PHP
 ```
 
-```bash
 [![Ver video explicativo](https://img.youtube.com/vi/1lumk-z4Jkk/0.jpg)](https://youtu.be/1lumk-z4Jkk)
-```
+
 
 💡 Mejoras futuras
 
