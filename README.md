@@ -91,4 +91,4 @@ Diccionario más amplio de palabras secretas.
 
 Modo multijugador en tiempo real.
 
-**AVISO** NAVEGADOR RECOMENDABLE: MOZILLA FIREFOX. (CHROME puede dar problemas o incoherencias en el CSS).
+**AVISO** NAVEGADOR RECOMENDABLE: MOZILLA FIREFOX. (CHROME puede dar problemas en el CSS).
