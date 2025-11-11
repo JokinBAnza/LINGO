@@ -40,25 +40,26 @@ cd LINGO
 ## 2️⃣ Configuración del backend
 
 Instala dependencias de PHP con Composer:
-
+```bash
 composer install
-
+```
 
 Crea el archivo .env a partir del ejemplo:
-
+```bash
 cp .env.example .env
-
+```
 
 y configura tus credenciales de base de datos.
 
 Ejecuta las migraciones para crear las tablas necesarias:
-
+```bash
 php artisan migrate
-
+```
 
 (Opcional) Genera la clave de aplicación Laravel:
-
+```bash
 php artisan key:generate
+```
 
 ## 3️⃣ Servir la aplicación localmente
 php artisan serve
