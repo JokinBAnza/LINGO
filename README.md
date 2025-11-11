@@ -35,8 +35,9 @@
 ```bash
 git clone https://github.com/JokinBAnza/LINGO.git
 cd LINGO
+```
 
-2️⃣ Configuración del backend
+## 2️⃣ Configuración del backend
 
 Instala dependencias de PHP con Composer:
 
@@ -59,13 +60,13 @@ php artisan migrate
 
 php artisan key:generate
 
-3️⃣ Servir la aplicación localmente
+## 3️⃣ Servir la aplicación localmente
 php artisan serve
 
 
 Esto levantará el servidor en http://127.0.0.1:8000.
 
-4️⃣ Despliegue en producción
+## 4️⃣ Despliegue en producción
 
 Sube los archivos a cualquier hosting que soporte PHP y MySQL.
 
