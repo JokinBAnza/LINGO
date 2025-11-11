@@ -88,10 +88,11 @@ LINGO/
 
 💡 Mejoras futuras
 
-Sistema de puntuaciones por usuario más completo.
+- Sistema de puntuaciones por usuario más completo.
 
-Diccionario más amplio de palabras secretas.
+- Diccionario más amplio de palabras secretas.
 
-Modo multijugador en tiempo real.
+- Modo multijugador en tiempo real.
 
-**AVISO** NAVEGADOR RECOMENDABLE: MOZILLA FIREFOX. (CHROME puede dar problemas en el CSS).
+Muchas gracias por apoyar este proyecto,
+Jokin B.
