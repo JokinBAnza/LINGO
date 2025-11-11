@@ -85,7 +85,7 @@ LINGO/
 ├─ .env             # Configuración de entorno
 └─ composer.json    # Dependencias de PHP
 ```
-
+## Video Explicativo:
 [![Ver video explicativo](https://img.youtube.com/vi/1lumk-z4Jkk/0.jpg)](https://youtu.be/1lumk-z4Jkk)
 
 
