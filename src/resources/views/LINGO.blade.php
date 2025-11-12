@@ -39,7 +39,7 @@
     <aside id="panelLateral">
       <div id="contenedor3">
       <button id="btnTiempo">TIEMPO</button>
-        <p id="conta">Pulsa JUGAR para empezar</p>
+        <p id="conta"></p>
       </div>
       <div id="contenedorPunt">
       <button id="btnPuntuacion">PUNTUACIÓN</button>
