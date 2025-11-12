@@ -183,6 +183,9 @@ aside button {
     gap: 5px;
     font-size: 1.1rem;
 }
+#conta{
+    margin-top:20px;
+}
 
 #mensajeFinal {
     margin-top: 15px;
