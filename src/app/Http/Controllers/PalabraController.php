@@ -34,6 +34,18 @@ class PalabraController extends Controller
 
         return view('palabras.index', ['palabras' => $palabras]);
     }
+    public function verificarPalabra($palabra)
+    {
+        // Busca la palabra exacta en la base de datos
+        $existe = Palabra::where('palabra', $palabra)->exists();
+
+        // Devuelve una respuesta simple o JSON
+        return response()->json([
+            'palabra' => $palabra,
+            'existe' => $existe
+        ]);
+    }
+
 
 
     /**
