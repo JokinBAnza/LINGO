@@ -45,6 +45,15 @@ class PalabraController extends Controller
             'existe' => $existe
         ]);
     }
+  
+        // Método existente: verificarPalabra()
+        
+        public function mostrarTodas()
+        {
+            $palabras = Palabra::all(); // Recupera todas las palabras de la base de datos
+            return response()->json($palabras); // Devuelve un JSON con todas
+        }
+    
 
 
 

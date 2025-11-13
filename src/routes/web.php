@@ -55,6 +55,7 @@ Route::get('/palabrasRandom/{cantidad?}', [PalabraController::class, 'indexRando
 ->middleware('auth')
 ->name('palabras.indexRandom');
 
+Route::get('/palabras', [PalabraController::class, 'mostrarTodas']);
 
 //Ruta que devuelve de la tabla 'palabras' una palabra aleatoria
 //Route::get('/palabrasRandom/', [PalabraController::class, indexRandom'])->name('palabras.indexRandomw');
